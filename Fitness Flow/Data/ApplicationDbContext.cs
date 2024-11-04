@@ -4,7 +4,11 @@ using Microsoft.EntityFrameworkCore;
 public class ApplicationDbContext : IdentityDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options) { }
+        : base(options)
+    {
+    }
 
-    // DbSets for your application models
+    public DbSet<UserProfile> UserProfiles { get; set; }
+    public DbSet<Goal> Goals { get; set; }
+    public DbSet<Progress> Progress { get; set; }
 }
