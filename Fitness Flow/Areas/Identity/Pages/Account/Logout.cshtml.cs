@@ -27,16 +27,18 @@ namespace Fitness_Flow.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+
+            TempData["LogoutMessage"] = "You have successfully logged out.";
+
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);
             }
             else
             {
-                // This needs to be a redirect so that the browser performs a new
-                // request and the identity for the user gets updated.
-                return RedirectToPage();
+                return RedirectToPage("/Index"); // Redirect to the home page after logout
             }
         }
+
     }
 }
