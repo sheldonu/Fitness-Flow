@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace Fitness_Flow.Data.Models;
+
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 public class Goal

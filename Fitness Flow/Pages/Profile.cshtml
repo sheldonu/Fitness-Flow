@@ -1,0 +1,52 @@
+﻿@page
+@model Fitness_Flow.Pages.ProfileModel
+@{
+    ViewData["Title"] = "Your Profile";
+}
+
+<h2>Manage Your Profile</h2>
+
+<form method="post" class="mt-4">
+    <div class="form-group">
+        <label for="FirstName">First Name</label>
+        <input type="text" asp-for="UserProfile.FirstName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="LastName">Last Name</label>
+        <input type="text" asp-for="UserProfile.LastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Age">Age</label>
+        <input type="number" asp-for="UserProfile.Age" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Weight">Weight (kg)</label>
+        <input type="number" step="0.1" asp-for="UserProfile.Weight" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Height">Height (cm)</label>
+        <input type="number" step="0.1" asp-for="UserProfile.Height" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Gender">Gender</label>
+        <select asp-for="UserProfile.Gender" class="form-control">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+    <button type="submit" formaction="/Profile/Delete" class="btn btn-danger mt-3">Delete Profile</button>
+</form>
+
+@if (Model.SuccessMessage != null)
+{
+    <div class="alert alert-success mt-3">@Model.SuccessMessage</div>
+}

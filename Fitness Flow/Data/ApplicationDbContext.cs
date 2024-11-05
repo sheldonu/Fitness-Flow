@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Fitness_Flow.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : IdentityDbContext
@@ -8,7 +9,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
 
-    public DbSet<UserProfile> UserProfiles { get; set; }
-    public DbSet<Goal> Goals { get; set; }
+    public DbSet<UserProfile> UserProfile { get; set; }
+    public DbSet<Goal> Goal { get; set; }
     public DbSet<Progress> Progress { get; set; }
 }
