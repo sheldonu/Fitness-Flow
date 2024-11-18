@@ -42,3 +42,43 @@
         </div>
     </div>
 </div>
+
+<h3 class="mt-5">Your Data vs Averages</h3>
+<canvas id="dashboardChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById('dashboardChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Age', 'Weight', 'Height'],
+                datasets: [
+                    {
+                        label: 'Your Data',
+                        data: @Html.Raw(Json.Serialize(Model.UserStats.Values.ToList())),
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Average',
+                        data: @Html.Raw(Json.Serialize(Model.Averages.Values.ToList())),
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>

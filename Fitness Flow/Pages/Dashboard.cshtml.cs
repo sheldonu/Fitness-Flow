@@ -19,6 +19,8 @@ namespace Fitness_Flow.Pages
             _context = context;
         }
 
+        public Dictionary<string, decimal?> Averages { get; set; } = new();
+        public Dictionary<string, decimal?> UserStats { get; set; } = new();
         public List<Goal>? UserGoals { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -30,6 +32,20 @@ namespace Fitness_Flow.Pages
                 .Where(goal => goal.UserId == userId)
                 .OrderBy(goal => goal.CreatedAt)
                 .ToListAsync();
+
+            var userProfile = await _context.UserProfile.FindAsync(userId);
+
+            if (userProfile != null)
+            {
+                UserStats["Age"] = userProfile.Age;
+                UserStats["Weight"] = userProfile.Weight;
+                UserStats["Height"] = userProfile.Height;
+            }
+
+            Averages["Age"] = _context.UserProfile.Where(p => p.Age.HasValue).Average(p => (decimal?)p.Age);
+            Averages["Weight"] = _context.UserProfile.Where(p => p.Weight.HasValue).Average(p => p.Weight);
+            Averages["Height"] = _context.UserProfile.Where(p => p.Height.HasValue).Average(p => p.Height);
+
 
             return Page();
         }
