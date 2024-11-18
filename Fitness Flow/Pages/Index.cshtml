@@ -4,33 +4,36 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="hero-section text-center text-white py-5" style="background-color: #007bff;">
-    <h1>Welcome to Fitness Flow</h1>
-    <p>Your journey to fitness starts here!</p>
-    <a id="register" asp-area="Identity" asp-page="/Account/Register" class="btn btn-light btn-lg mt-3">Get Started</a>
-</div>
-
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Track Your Progress</h2>
-            <p>See your fitness journey come to life with real-time progress tracking and insights.</p>
-        </div>
-        <div class="col-md-4">
-            <h2>Personalized Plans</h2>
-            <p>Our plans adapt to your goals and lifestyle to keep you on track for success.</p>
-        </div>
-        <div class="col-md-4">
-            <h2>Community Support</h2>
-            <p>Stay motivated with a supportive community of like-minded individuals.</p>
+<div class="hero-section">
+    <div class="overlay">
+        <div class="hero-content text-white text-center">
+            <h1 class="display-4 fw-bold">Welcome to Fitness Flow</h1>
+            <p class="lead">Your journey to fitness starts here!</p>
+            <a id="register" asp-area="Identity" asp-page="/Account/Register" class="btn btn-light btn-lg mt-3">Get Started</a>
         </div>
     </div>
 </div>
 
-<style>
-    .hero-section {
-        background-image: url('/images/hero-background.jpg');
-        background-size: cover;
-        padding: 100px 0;
-    }
-</style>
+<div class="container mt-5">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="feature-box">
+                <h2>Track Your Progress</h2>
+                <p>See your fitness journey come to life with real-time progress tracking and insights.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box">
+                <h2>Personalized Plans</h2>
+                <p>Our plans adapt to your goals and lifestyle to keep you on track for success.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box">
+                <h2>Community Support</h2>
+                <p>Stay motivated with a supportive community of like-minded individuals.</p>
+            </div>
+        </div>
+    </div>
+</div>
+

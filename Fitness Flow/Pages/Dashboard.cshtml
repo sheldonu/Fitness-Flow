@@ -1,4 +1,44 @@
 ﻿@page
 @model Fitness_Flow.Pages.DashboardModel
 @{
+    ViewData["Title"] = "Dashboard";
 }
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4">Your Goals</h2>
+
+            <a asp-page="/ManageGoals" class="btn btn-primary mt-3">Manage Goals</a>
+
+
+            @if (Model.UserGoals != null && Model.UserGoals.Any())
+            {
+                <div class="list-group">
+                    @foreach (var goal in Model.UserGoals)
+                    {
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>@goal.Description</strong>
+                                <p class="text-muted mb-0">
+                                    Created: @goal.CreatedAt.ToString("MMM dd, yyyy")
+                                    @if (goal.TargetDate.HasValue)
+                                    {
+                                        <text>Target: @goal.TargetDate.Value.ToString("MMM dd, yyyy")</text>
+                                    }
+                                </p>
+                            </div>
+                            <span class="badge bg-@(goal.IsCompleted ? "success" : "warning")">
+                                @(goal.IsCompleted ? "Completed" : "In Progress")
+                            </span>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">You have no goals set up yet.</p>
+            }
+        </div>
+    </div>
+</div>

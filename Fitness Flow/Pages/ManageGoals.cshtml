@@ -1,0 +1,105 @@
+﻿@page
+@model Fitness_Flow.Pages.ManageGoalsModel
+@{
+    ViewData["Title"] = "Manage Your Goals";
+}
+
+<h2>Manage Your Goals</h2>
+
+<div class="mt-4">
+    <h4>Current Goals</h4>
+    @if (Model.UserGoals.Any())
+    {
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Created At</th>
+                    <th>Target Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var goal in Model.UserGoals)
+                {
+                    <tr id="goal-row-@goal.GoalId">
+                        <td>@goal.Description</td>
+                        <td>@goal.CreatedAt.ToShortDateString()</td>
+                        <td>@goal.TargetDate?.ToShortDateString()</td>
+                        <td id="status-@goal.GoalId">@(goal.IsCompleted ? "Completed" : "In Progress")</td>
+                        <td>
+                            <button class="btn btn-success btn-sm"
+                                    id="complete-button-@goal.GoalId"
+                            @(goal.IsCompleted ? "disabled" : "")
+                                    onclick="markAsCompleted(@goal.GoalId, '@Url.Page("ManageGoals", "Complete", new { goalId = goal.GoalId })')">
+                                @(goal.IsCompleted ? "Finished!" : "Mark as Completed")
+                            </button>
+                            <form method="post" class="d-inline" asp-page-handler="Delete" asp-route-goalId="@goal.GoalId">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">No goals added yet. Start by creating a new goal below.</p>
+    }
+</div>
+
+<hr />
+
+<div class="mt-4">
+    <h4>Add a New Goal</h4>
+    <form method="post" class="mt-3">
+        <div class="form-group">
+            <label for="Description">Description</label>
+            <input type="text" asp-for="NewGoal.Description" class="form-control" />
+            <span asp-validation-for="NewGoal.Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="TargetDate">Target Date</label>
+            <input type="date" asp-for="NewGoal.TargetDate" class="form-control" />
+            <span asp-validation-for="NewGoal.TargetDate" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Add Goal</button>
+    </form>
+
+    @if (Model.SuccessMessage != null)
+    {
+        <div class="alert alert-success mt-3">@Model.SuccessMessage</div>
+    }
+</div>
+
+<script>
+    async function markAsCompleted(goalId, url) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                }
+            });
+
+            if (response.ok) {
+                // Update the button text
+                const button = document.getElementById(`complete-button-${goalId}`);
+                button.textContent = "Finished!";
+                button.disabled = true;
+
+                // Update the status
+                const status = document.getElementById(`status-${goalId}`);
+                status.textContent = "Completed";
+            } else {
+                console.error("Failed to mark as completed");
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    }
+</script>

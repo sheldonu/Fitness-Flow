@@ -10,6 +10,6 @@ public class ApplicationDbContext : IdentityDbContext
     }
 
     public DbSet<UserProfile> UserProfile { get; set; }
-    public DbSet<Goal> Goal { get; set; }
+    public DbSet<Goal> Goals { get; set; }
     public DbSet<Progress> Progress { get; set; }
 }
