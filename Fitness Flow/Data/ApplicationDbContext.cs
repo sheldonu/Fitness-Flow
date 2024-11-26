@@ -12,4 +12,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<UserProfile> UserProfile { get; set; }
     public DbSet<Goal> Goals { get; set; }
     public DbSet<Progress> Progress { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<ShoppingCart> ShoppingCart { get; set; }
 }
