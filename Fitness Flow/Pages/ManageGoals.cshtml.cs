@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Fitness_Flow.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fitness_Flow.Pages
 {
+    [Authorize]
     public class ManageGoalsModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;

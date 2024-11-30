@@ -1,4 +1,5 @@
 using Fitness_Flow.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Fitness_Flow.Pages
 {
+    [Authorize]
     public class ShoppingCartModel : PageModel
     {
         private readonly ApplicationDbContext _context;

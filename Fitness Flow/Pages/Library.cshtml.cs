@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Fitness_Flow.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fitness_Flow.Pages
 {
+    [Authorize]
     public class LibraryModel : PageModel
     {
         private readonly ExerciseApiService _exerciseApiService;
