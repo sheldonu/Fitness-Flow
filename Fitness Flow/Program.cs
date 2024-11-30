@@ -1,3 +1,4 @@
+using Fitness_Flow.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddHttpClient<ExerciseApiService>(client =>
+{
+    client.BaseAddress = new Uri("https://api.api-ninjas.com/v1/");
+});
+
 
 var app = builder.Build();
 

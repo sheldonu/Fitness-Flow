@@ -93,5 +93,31 @@ namespace Fitness_Flow.Pages
             return RedirectToPage();
         }
 
+        public async Task<IActionResult> OnPostSubmitOrderAsync()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Get all cart items for the user
+            var cartItems = await _context.ShoppingCart
+                .Where(item => item.UserId == userId)
+                .ToListAsync();
+
+            if (cartItems.Any())
+            {
+                // Clear the cart
+                _context.ShoppingCart.RemoveRange(cartItems);
+                await _context.SaveChangesAsync();
+
+                // Set success message
+                TempData["OrderMessage"] = "Your order has been submitted successfully!";
+            }
+            else
+            {
+                TempData["OrderMessage"] = "Your cart is empty. Please add items before submitting an order.";
+            }
+
+            return RedirectToPage();
+        }
+
     }
 }
